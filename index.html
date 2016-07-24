@@ -1,0 +1,18 @@
+<html>
+<head>
+</head>
+<body>
+	<h1>Flight</h1>
+	<div id="flight-canvas"></div>
+
+	<script type="text/javascript" src="./node_modules/systemjs/dist/system.js"></script>
+	<script>
+		SystemJS.config({
+			baseURL: 'built',
+			defaultJSExtensions: 'js'
+		});
+
+		SystemJS.import('index.js');
+	</script>
+</body>
+</html>
