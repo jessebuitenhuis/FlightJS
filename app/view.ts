@@ -2,16 +2,17 @@ import { config } from './config';
 
 interface ViewInterface {
 	drawScene(gameObjects: Array<any>);
+	ctx: CanvasRenderingContext2D;
 }
 
 export class View implements ViewInterface {
 	private _canvas: HTMLCanvasElement;
-	private _ctx: CanvasRenderingContext2D;
+	public ctx: CanvasRenderingContext2D;
 	private _keyPressed: Object;
 
 	constructor(parentEl: HTMLElement, keyPressed: Object) {
 		this.createCanvas(parentEl);
-		this._ctx = this._canvas.getContext("2d");
+		this.ctx = this._canvas.getContext("2d");
 		this._keyPressed = keyPressed;
 	}
 
@@ -27,12 +28,12 @@ export class View implements ViewInterface {
 		this.clearCanvas();
 
 		gameObjects.forEach(function(gameObject){
-			gameObject.draw(this._ctx, this._keyPressed);
+			gameObject.draw();
 		}, this);
 	}
 
 	private clearCanvas() {
-		this._ctx.fillStyle = config.backgroundColor;
-		this._ctx.fillRect(0,0,this._canvas.width, this._canvas.height);
+		this.ctx.fillStyle = config.backgroundColor;
+		this.ctx.fillRect(0,0,this._canvas.width, this._canvas.height);
 	}
 }

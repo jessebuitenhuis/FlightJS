@@ -7,5 +7,6 @@ export var config = {
 	planeColor: "#D19C18",
 	rotateSpeed: 15,
 	maxRotation: 65,
-	altitudeSpeed: 0.45
+	altitudeSpeed: 0.45,
+	roadLength: 20
 };

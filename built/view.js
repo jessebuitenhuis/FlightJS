@@ -12,7 +12,7 @@ System.register(['./config'], function(exports_1, context_1) {
             View = (function () {
                 function View(parentEl, keyPressed) {
                     this.createCanvas(parentEl);
-                    this._ctx = this._canvas.getContext("2d");
+                    this.ctx = this._canvas.getContext("2d");
                     this._keyPressed = keyPressed;
                 }
                 View.prototype.createCanvas = function (parentEl) {
@@ -24,12 +24,12 @@ System.register(['./config'], function(exports_1, context_1) {
                 View.prototype.drawScene = function (gameObjects) {
                     this.clearCanvas();
                     gameObjects.forEach(function (gameObject) {
-                        gameObject.draw(this._ctx, this._keyPressed);
+                        gameObject.draw();
                     }, this);
                 };
                 View.prototype.clearCanvas = function () {
-                    this._ctx.fillStyle = config_1.config.backgroundColor;
-                    this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
+                    this.ctx.fillStyle = config_1.config.backgroundColor;
+                    this.ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
                 };
                 return View;
             }());

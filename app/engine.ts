@@ -2,6 +2,7 @@ import { Keyboard } from './keyboard';
 import { View } from './view';
 import { config } from './config';
 import { Plane } from './plane';
+import { Road } from './road';
 
 interface EngineInterface {
 	start();
@@ -12,15 +13,20 @@ export class Engine implements EngineInterface {
 	private _keyboard: Keyboard;
 	private _view: View;
 	private _interval: number;
-	private _plane: Plane;
 	private _gameObjects: Array<any>;
+	private _plane: Plane;
+	private _road: Road;
 
 	constructor(parentEl: HTMLElement) {
 		this._keyboard = new Keyboard();
 		this._view = new View(parentEl, this._keyboard.keyPressed);
-
-		this._plane = new Plane();
+		
 		this._gameObjects = [];
+
+		this._road = new Road(this._view.ctx);
+		this._gameObjects.push(this._road);
+
+		this._plane = new Plane(this._view.ctx, this._keyboard.keyPressed);
 		this._gameObjects.push(this._plane);
 	}
 
@@ -33,7 +39,7 @@ export class Engine implements EngineInterface {
 		clearInterval(this._interval);
 	}
 
-	private _drawScene() {
+	private _drawScene() {	
 		this._view.drawScene(this._gameObjects);
 	}
 }
